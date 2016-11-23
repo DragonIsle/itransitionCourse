@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd
+        http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+
+    <changeSet id="1" author="ivan">
+        <createTable tableName="users">
+            <column name="login" type="varchar(50)">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="password" type="varchar(50)"/>
+            <column name="auth_type" type="varchar(20)"/>
+            <column name="role" type="varchar(20)"/>
+            <column name="avatar_id" type="varchar(255)"/>
+            <column name="name" type="varchar(50)"/>
+        </createTable>
+    </changeSet>
+    <changeSet id="2" author="ivan">
+        <createTable tableName="creatives">
+            <column name="id" type="int(11)" autoIncrement="true">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="rating" type="int(11)"/>
+            <column name="user_id" type="varchar(50)"/>
+        </createTable>
+    </changeSet>
+    <changeSet id="3" author="ivan">
+        <addColumn tableName="creatives">
+            <column name="name" type="varchar(50)"/>
+        </addColumn>
+        <createTable tableName="chapters">
+            <column name="id" type="int(11)">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="number" type="int(11)"/>
+            <column name="file_ref" type="varchar(50)"/>
+        </createTable>
+    </changeSet>
+    <changeSet id="4" author="ivan">
+        <createTable tableName="tags">
+            <column name="name" type="varchar(50)">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet id="5" author="ivan">
+        <createTable tableName="creative_tag">
+            <column name="tag_name" type="varchar(50)"/>
+            <column name="creative_id" type="int(11)"/>
+        </createTable>
+        <addPrimaryKey tableName="creative_tag" columnNames="tag_name, creative_id"/>
+    </changeSet>
+    <changeSet id="6" author="ivan">
+        <addColumn tableName="chapters">
+            <column name="creative_id" type="int(11)"/>
+        </addColumn>
+    </changeSet>
+   <!-- <changeSet id="4" author="ivan">
+        <addForeignKeyConstraint baseColumnNames="login"
+                                 baseTableName="users"
+                                 constraintName="fk_user_login"
+                                 onDelete="CASCADE"
+                                 onUpdate="RESTRICT"
+                                 referencedColumnNames="user_id"
+                                 referencedTableName="creatives"/>
+        <addForeignKeyConstraint baseColumnNames="id"
+                                 baseTableName="creatives"
+                                 constraintName="fk_creative_id"
+                                 onDelete="CASCADE"
+                                 onUpdate="RESTRICT"
+                                 referencedColumnNames="creative_id"
+                                 referencedTableName="chapters"/>
+    </changeSet>
+    -->
+</databaseChangeLog>

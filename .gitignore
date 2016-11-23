@@ -1,0 +1,6 @@
+**/target
+target
+.idea
+*.epoch
+*.iml
+*.log

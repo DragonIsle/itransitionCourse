@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:spring="http://java.sun.com/jsf/composite" xmlns:c="http://java.sun.com/jsf/core"
+      xmlns:th="http://java.sun.com/jsf/facelets">
+<head>
+    <meta charset="UTF-8">
+    <title>Home Page</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+</head>
+<body ng-app="example">
+<div class="container" ng-controller="AuthController">
+    <div class="row">
+        <div class="col-md-3">
+            <h3>Entrance</h3>
+            <form ng-hide="noVisibility">
+                <div class="form-group">
+                    <input type="text" class="form-control" placeholder="Login"
+                           maxlength="255" ng-model="user.login">
+                </div>
+                <div class="form-group">
+                    <input type="password" class="form-control" placeholder="Password"
+                           maxlength="255" ng-model="user.password">
+                </div>
+                <button class="btn btn-success" ng-click="authorize()">Log in</button>
+                <a href="registration.html" class="btn btn-default">Registration</a>
+            </form>
+            <button class="btn btn-success" ng-click="authorizeTW()">Log in</button>
+            <a href="registration.html" class="btn btn-default">Registration</a>
+            <br/>
+            <h4>Or enter with:</h4>
+            <br/>
+            <map name="fbmap">
+                <area href="facebook">
+            </map>
+            <img src="images/facebook.png" usemap="#fbmap"/>
+            <map name="twmap">
+                <area href="twitter">
+            </map>
+            <img src="images/twitter.png" usemap="#twmap"/>
+            <map name="vkmap">
+                <area href="vkontakte">
+            </map>
+            <img src="images/vkontakte.png" usemap="#vkmap"/>
+            <br/>
+            <div ng-show="noVisibility">
+                <h4>You are successfully enter into your account! Press this link to move to your
+                    page:</h4>
+                <br/>
+                <a href="personalPage.html?login={{us.login}}">My page</a>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <h3>Most Popular Creatives</h3>
+            <label for="buttons">Sort for:</label>
+            <div class="btn-group" id="buttons">
+                <button class="btn">Name</button>
+                <button class="btn">Rating</button>
+                <button class="btn">Last updated</button>
+            </div>
+            <table class="table table-hover" ng-show="creatives.length">
+                <tr>
+                    <th class="text-center">Name</th>
+                    <th class="text-center">Creator</th>
+                    <th class="text-center">Rating</th>
+                </tr>
+                <tr ng-repeat="creative in creatives">
+                    <td class="text-center">{{ creative.name }}</td>
+                    <td class="text-center">{{ creative.author.name }}</td>
+                    <td class="text-center">{{ creative.rating }}</td>
+                </tr>
+            </table>
+        </div>
+    </div>
+</div>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.13/angular.min.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
