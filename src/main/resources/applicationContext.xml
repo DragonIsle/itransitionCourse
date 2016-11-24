@@ -10,7 +10,7 @@
        <import resource="applicationContext-datasource.xml" />
        <import resource="applicationContext-deployment.xml" />
        <import resource="socialContext.xml"/>
-       <bean id="session" class="java.util.concurrent.ConcurrentHashMap" scope="session">
+       <bean id="session" class="example.session.MySessionClass" scope="session">
               <aop:scoped-proxy/>
        </bean>
 </beans>

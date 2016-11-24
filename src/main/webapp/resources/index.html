@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <title>Home Page</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/my.css">
 </head>
 <body ng-app="example">
 <div class="container" ng-controller="AuthController">
@@ -23,49 +24,53 @@
                 <button class="btn btn-success" ng-click="authorize()">Log in</button>
                 <a href="registration.html" class="btn btn-default">Registration</a>
             </form>
-            <button class="btn btn-success" ng-click="authorizeTW()">Log in</button>
-            <a href="registration.html" class="btn btn-default">Registration</a>
-            <br/>
-            <h4>Or enter with:</h4>
-            <br/>
-            <map name="fbmap">
-                <area href="facebook">
-            </map>
-            <img src="images/facebook.png" usemap="#fbmap"/>
-            <map name="twmap">
-                <area href="twitter">
-            </map>
-            <img src="images/twitter.png" usemap="#twmap"/>
-            <map name="vkmap">
-                <area href="vkontakte">
-            </map>
-            <img src="images/vkontakte.png" usemap="#vkmap"/>
-            <br/>
+            <div ng-hide="noVisibility">
+                <br/>
+                <h4>Or enter with:</h4>
+                <br/>
+                <a class="btn btn-default" ng-click="authorizeFB()"><img
+                        src="css/images/facebook.png"/></a>
+                <a class="btn btn-default" ng-click="authorizeTW()"><img
+                        src="css/images/twitter.png"/></a>
+                <a class="btn btn-default" ng-click="authorizeVK()"><img
+                        src="css/images/vkontakte.png"/></a>
+                <br/>
+            </div>
             <div ng-show="noVisibility">
-                <h4>You are successfully enter into your account! Press this link to move to your
+                <h4>You are successfully enter into your account! Press this button to move to your
                     page:</h4>
                 <br/>
-                <a href="personalPage.html?login={{us.login}}">My page</a>
+                <button class="btn btn-info" ng-click="personalPage()">My page</button>
+            </div>
+            <div ng-show="message">
+                <h4>Wrong username or password</h4>
             </div>
         </div>
         <div class="col-md-6">
-            <h3>Most Popular Creatives</h3>
-            <label for="buttons">Sort for:</label>
-            <div class="btn-group" id="buttons">
-                <button class="btn">Name</button>
-                <button class="btn">Rating</button>
-                <button class="btn">Last updated</button>
+            <div class="row">
+                <h3 class="col-md-4">Creatives</h3>
+                <label for="buttons">Sort for:</label>
+                <div class="btn-group" id="buttons">
+                    <button class="btn" ng-click="sortForName()">Name</button>
+                    <button class="btn" ng-click="sortForRating()">Rating</button>
+                    </div>
             </div>
-            <table class="table table-hover" ng-show="creatives.length">
+            <br/>
+            <table class="table table-inverse" ng-show="creatives.length">
                 <tr>
                     <th class="text-center">Name</th>
                     <th class="text-center">Creator</th>
                     <th class="text-center">Rating</th>
+                    <th class="text-center">Watch</th>
                 </tr>
                 <tr ng-repeat="creative in creatives">
                     <td class="text-center">{{ creative.name }}</td>
-                    <td class="text-center">{{ creative.author.name }}</td>
+                    <td class="text-center">{{ creative.authorName }}</td>
                     <td class="text-center">{{ creative.rating }}</td>
+                    <td class="text-center">
+                        <span ng-click="redact(creative)" class="glyphicon glyphicon-eye-open"
+                              style="cursor: pointer"></span>
+                    </td>
                 </tr>
             </table>
         </div>

@@ -1,6 +1,7 @@
 package example.dao;
 
 import example.models.Creative;
+import example.models.User;
 
 import java.util.Collection;
 
@@ -13,4 +14,8 @@ public interface CreativeDao {
     void add(Creative creative);
 
     void remove(Integer id);
+
+    Collection<Creative> getByUserLogin(String login);
+
+    Creative getById(int id);
 }

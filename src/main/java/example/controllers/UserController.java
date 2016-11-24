@@ -1,15 +1,18 @@
 package example.controllers;
 
+import example.enums.AuthType;
 import example.models.Chapter;
 import example.models.Creative;
 import example.models.User;
 import example.service.CreativeService;
 import example.service.UserService;
+import example.session.MySessionClass;
 import org.apache.commons.codec.digest.DigestUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.web.bind.annotation.*;
 
+import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -24,10 +27,14 @@ public class UserController {
     @Autowired
     private CreativeService cs;
 
+    @Resource(name="session")
+    private MySessionClass session;
+
     @RequestMapping(method = RequestMethod.POST)
     public User authorize(@RequestBody User user) {
         User u=us.getUser(user.getLogin());
         if(u!=null&&u.getPassword().equals(DigestUtils.md5Hex(user.getPassword()))){
+            session.setUser(u);
             return u;
         }
         return null;
@@ -40,15 +47,12 @@ public class UserController {
     @RequestMapping(method = RequestMethod.PUT)
     public Collection<Creative> addCreative(@RequestBody User user){
         User u=us.getUser(user.getLogin());
-        Creative crea=new Creative();
-        crea.setAuthor(u);
-        LinkedList<Chapter> list=new LinkedList<>();
-        Chapter chapter=new Chapter();
-        chapter.setNumber(1);
-        list.add(chapter);
-        crea.setChapters(list);
-        cs.add(crea);
-        return us.getUser(user.getLogin()).getCreatives();
+        Creative cr=new Creative();
+        cr.setAuthor(u);
+        cr.setName(u.getName()+"'s note");
+        cr.setAuthorName(u.getName());
+        cs.add(cr);
+        return cs.getByUserLogin(u.getLogin());
     }
     @RequestMapping(method = RequestMethod.GET)
     public User getByLogin(@RequestParam("login") String s){

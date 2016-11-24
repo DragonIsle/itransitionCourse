@@ -59,6 +59,11 @@
             <column name="creative_id" type="int(11)"/>
         </addColumn>
     </changeSet>
+    <changeSet id="7" author="ivan">
+        <addColumn tableName="creatives">
+            <column name="author_name" type="varchar(50)"/>
+        </addColumn>
+    </changeSet>
    <!-- <changeSet id="4" author="ivan">
         <addForeignKeyConstraint baseColumnNames="login"
                                  baseTableName="users"

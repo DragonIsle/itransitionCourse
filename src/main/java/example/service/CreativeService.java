@@ -11,4 +11,6 @@ public interface CreativeService {
     Collection<Creative> getAll();
     void add(Creative creative);
     void remove(Integer id);
+    Collection<Creative> getByUserLogin(String login);
+    Creative getById(int id);
 }

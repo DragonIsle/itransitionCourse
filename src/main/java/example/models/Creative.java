@@ -31,6 +31,10 @@ public class Creative {
     @JsonProperty
     private double rating;
 
+    @Column(name = "author_name")
+    @JsonProperty
+    private String authorName;
+
     @OneToMany(mappedBy = "creative", fetch = FetchType.EAGER)
     private List<Chapter> chapters;
 
@@ -59,6 +63,14 @@ public class Creative {
     public String getName() {
 
         return name;
+    }
+    public void setAuthorName(String author_name) {
+        this.authorName = author_name;
+    }
+
+    public String getAuthorName() {
+
+        return authorName;
     }
 
     public int getId() {

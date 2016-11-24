@@ -3,25 +3,27 @@
     <title>Personal Page</title>
     <meta charset="UTF-8">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/my.css">
 </head>
 <body ng-app="personal">
 <div class="container" ng-controller="PageController">
-    <div class="row">
+    <h3 ng-hide="user">You are not authorized!</h3>
+    <div class="row" ng-show="user">
         <div class="col-md-3 col-md-offset-2">
             <br/>
             <br/>
-            <img src="{{user.avatarId}}" width="250" height="170">
+            <img src="{{user.avatarId}}" width="170" height="220">
         </div>
         <div class="col-md-3">
             <br/>
             <div class="row">
-                <h1> Hi, {{user.login}}!</h1>
+                <h1>{{user.name}}</h1>
             </div>
             <div class="row">
-                <img src="" width="50" height="70">
-                <img src="" width="50" height="70">
+                <!--<img src="" width="50" height="70">
+                <img src="" width="50" height="70">-->
             </div>
-            <div class="row">
+            <div class="row" ng-show="isAdmin">
                 <br/>
                 <label for="banButton">You have admin privilegies on this site!</label>
                 <a href="deleteUsersPage.html" class="btn btn-primary" id="banButton">Delete!</a>
@@ -33,7 +35,7 @@
 
         </div>
     </div>
-    <div class="row">
+    <div class="row" ng-show="user">
         <div class="col-md-6 col-md-offset-2">
             <h3>Your Creatives:</h3>
             <table class="table table-hover" ng-show="creatives.length">
@@ -43,10 +45,12 @@
                     <th class="text-center">Name</th>
                     <th class="text-center">Creator</th>
                     <th class="text-center">Rating</th>
+                    <th class="text-center">Press to delete(be careful)</th>
+                    <th class="text-center">Press to redact(or just watching)</th>
                 </tr>
                 <tr ng-repeat="creative in creatives">
                     <td class="text-center">{{ creative.name }}</td>
-                    <td class="text-center">{{ creative.author.name }}</td>
+                    <td class="text-center">{{ user.name}}</td>
                     <td class="text-center">{{ creative.rating }}</td>
                     <td class="text-center">
                         <span ng-click="remove(creative)" class="glyphicon glyphicon-minus"

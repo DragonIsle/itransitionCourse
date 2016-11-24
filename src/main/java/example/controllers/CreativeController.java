@@ -7,6 +7,7 @@ import example.models.Tag;
 import example.service.CreativeService;
 import example.service.TagService;
 import example.service.UserService;
+import example.session.MySessionClass;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -34,7 +35,7 @@ public class CreativeController {
     private TagService ts;
 
     @Resource(name = "session")
-    private ConcurrentHashMap session;
+    private MySessionClass session;
 
     @RequestMapping(method = RequestMethod.POST)
     public Collection<Creative> getAll(){
@@ -42,8 +43,8 @@ public class CreativeController {
     }
 
     @RequestMapping(method = RequestMethod.GET)
-    public Collection<Creative> getPersonalCreatives(@RequestParam String login){
-        return us.getUser(login).getCreatives();
+    public Collection<Creative> getPersonalCreatives(){
+        return us.getUser(session.getUser().getLogin()).getCreatives();
     }
 
     @RequestMapping(method = RequestMethod.DELETE)
@@ -53,7 +54,6 @@ public class CreativeController {
 
     @RequestMapping(value = "/tag", method = RequestMethod.GET)
     public Collection<Tag> getTags(@RequestParam Integer creativeId){
-        session.put(1, 2);
         return ts.getByCreative(creativeId);
     }
 
@@ -69,5 +69,10 @@ public class CreativeController {
         chapter1.setFileRef("/home/saul/fakeChapterFile2");
         chapters.add(chapter1);
         return chapters;
+    }
+    @RequestMapping(value = "/creator", method = RequestMethod.POST)
+    public String getCreator(@RequestParam Integer creativeId){
+        Creative cr=cs.getById(creativeId);
+        return cr.getAuthor().getName();
     }
 }

@@ -6,41 +6,25 @@
 var personal = angular.module('personal', []);
 
 personal.controller('PageController', function ($scope, $http) {
-    $http({
-            url: 'user',
-            method: "GET",
-            params: {
-                login: findGetParameter("login")
-            }
-        }
-    ).success(function (data) {
-        $scope.user=data;
+    $http.post('session').success(function (data) {
+        $scope.user = data;
+        $scope.isAdmin=($scope.user.role==="ADMIN");
     });
     $http({
             url: 'creative',
-            method: "GET",
-            params: {
-                login: findGetParameter("login")
-            }
+            method: "GET"
         }
     ).success(function (data) {
         $scope.creatives=data;
     });
-    function findGetParameter(parameterName) {
-        var result = null,
-            tmp = [];
-        location.search
-            .substr(1)
-            .split("&")
-            .forEach(function (item) {
-                tmp = item.split("=");
-                if (tmp[0] === parameterName) result = decodeURIComponent(tmp[1]);
-            });
-        return result;
-    }
     $scope.addCreative=function () {
         $http.put("user", $scope.user).success(function (data) {
             $scope.creatives=data;
+        })
+    };
+    $scope.getCreator=function (creative) {
+        $http.post('creative/creator', {params:{creativeId: creative.id}}).success(function (data) {
+            creative.creator=data;
         })
     };
     $scope.remove=function (creative) {

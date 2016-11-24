@@ -20,18 +20,12 @@
     </bean>
     <bean id="textEncryptor" class="org.springframework.security.crypto.encrypt.Encryptors"
           factory-method="noOpText"/>
-
-    <!--<bean id="usersConnectionRepository"
-          class="org.springframework.social.connect.jdbc.JdbcUsersConnectionRepository">
-        <constructor-arg ref="dataSource"/>
-        <constructor-arg ref="connectionFactoryLocator"/>
-        <constructor-arg ref="textEncryptor"/>
+    <bean id="facebookConnectionFactory" class="org.springframework.social.facebook.connect.FacebookConnectionFactory">
+        <constructor-arg value="1788770878068338"/>
+        <constructor-arg value="6ef82606151f86704c48f10d6596ce1c"/>
     </bean>
-
-    <bean id="connectionRepository" factory-method="createConnectionRepository"
-          factory-bean="usersConnectionRepository" scope="request">
-        <constructor-arg value="#{request.userPrincipal.name}"/>
-        <aop:scoped-proxy proxy-target-class="false"/>
+    <bean id="vkConnectionFactory" class="org.springframework.social.vkontakte.connect.VKontakteConnectionFactory">
+        <constructor-arg value="5679855"/>
+        <constructor-arg value="c8XwmwXDErAnq36LTZLP"/>
     </bean>
-    -->
 </beans>

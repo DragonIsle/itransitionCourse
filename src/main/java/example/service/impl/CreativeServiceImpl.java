@@ -24,6 +24,16 @@ public class CreativeServiceImpl implements CreativeService {
     }
 
     @Override
+    public Creative getById(int id) {
+        return creativeDao.getById(id);
+    }
+
+    @Override
+    public Collection<Creative> getByUserLogin(String login) {
+        return creativeDao.getByUserLogin(login);
+    }
+
+    @Override
     public void remove(Integer id) {
         creativeDao.remove(id);
     }

@@ -2,6 +2,7 @@ package example.dao.impl;
 
 import example.dao.CreativeDao;
 import example.models.Creative;
+import example.models.User;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
@@ -15,6 +16,16 @@ import java.util.Collection;
 public class CreativeDaoImpl implements CreativeDao{
     @PersistenceContext
     private EntityManager entityManager;
+
+    @Override
+    public Creative getById(int id) {
+        return entityManager.find(Creative.class, id);
+    }
+
+    @Override
+    public Collection<Creative> getByUserLogin(String login) {
+        return entityManager.find(User.class, login).getCreatives();
+    }
 
     @Override
     public Collection<Creative> getAll(){
