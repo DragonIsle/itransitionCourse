@@ -48,6 +48,9 @@ personal.controller('PageController', function ($scope, $http) {
 });
 
 personal.controller('CreativeController', function ($scope, $http) {
+    $http.post('session').success(function (data) {
+        $scope.user = data;
+    });
     $http.get("creative/tag", {params: {creativeId: 3}}).success(function (data) {
         $scope.tags=data;
     });

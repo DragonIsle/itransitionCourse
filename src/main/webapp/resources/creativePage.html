@@ -4,13 +4,20 @@
     <meta charset="UTF-8">
     <title>Creative</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/my.css">
 </head>
 <body ng-app="personal">
 <div class="container" ng-controller="CreativeController">
-    <div class="row">
+    <div ng-hide="user">
+        <h3>You are not authorized!</h3>
+        <a href="index.html" class="btn btn-default">Home page</a>
+    </div>
+    <div class="row" ng-show="user">
         <div class="col-md-3">
             <br/>
             <h3>Tags for this creative</h3>
+            <span ng-click="addCreative()" class="glyphicon glyphicon-plus"
+                  style="cursor: pointer"></span>
             <div ng-repeat="tag in tags"> {{tag.name}} </div>
         </div>
         <div class="col-md-6">

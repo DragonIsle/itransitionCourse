@@ -21,4 +21,9 @@ public class SessionController {
     public User getCurrentUser(){
         return session.getUser();
     }
+
+    @RequestMapping(method = RequestMethod.GET)
+    public void logout(){
+        session.setUser(null);
+    }
 }

@@ -19,6 +19,7 @@ App.controller('AuthController', function ($scope, $http) {
             if(data) {
                 $scope.noVisibility = data;
                 $scope.us = data;
+                $scope.message=false;
             }else{
                 $scope.message=true;
             }
@@ -44,10 +45,12 @@ App.controller('AuthController', function ($scope, $http) {
                     $scope.messageVis=true;
                 }else{
                     $scope.message="This user does already exists!";
+                    $scope.messageVis=true;
                 }
             })
         }else{
             $scope.message="Your passwords not equals!";
+            $scope.messageVis=true;
         }
     };
     $scope.deleteUser=function(){
@@ -75,5 +78,10 @@ App.controller('AuthController', function ($scope, $http) {
     };
     $scope.redact=function (creative) {
         window.location="creativePage.html?id="+creative.id;
+    };
+    $scope.logout=function () {
+        $http.get("session").success(function (data) {
+            window.location="index.html";
+        })
     }
 });

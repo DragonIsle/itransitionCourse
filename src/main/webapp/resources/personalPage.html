@@ -7,7 +7,10 @@
 </head>
 <body ng-app="personal">
 <div class="container" ng-controller="PageController">
-    <h3 ng-hide="user">You are not authorized!</h3>
+    <div ng-hide="user">
+        <h3>You are not authorized!</h3>
+        <a href="index.html" class="btn btn-default">Home page</a>
+    </div>
     <div class="row" ng-show="user">
         <div class="col-md-3 col-md-offset-2">
             <br/>
@@ -45,8 +48,8 @@
                     <th class="text-center">Name</th>
                     <th class="text-center">Creator</th>
                     <th class="text-center">Rating</th>
-                    <th class="text-center">Press to delete(be careful)</th>
-                    <th class="text-center">Press to redact(or just watching)</th>
+                    <th class="text-center">Delete</th>
+                    <th class="text-center">Redact</th>
                 </tr>
                 <tr ng-repeat="creative in creatives">
                     <td class="text-center">{{ creative.name }}</td>
