@@ -76,8 +76,8 @@ App.controller('AuthController', function ($scope, $http) {
     $scope.personalPage=function () {
       window.location="personalPage.html";
     };
-    $scope.redact=function (creative) {
-        window.location="creativePage.html?id="+creative.id;
+    $scope.redirect=function (creative) {
+        window.location="creativeWatch.html?id="+creative.id;
     };
     $scope.logout=function () {
         $http.get("session").success(function (data) {

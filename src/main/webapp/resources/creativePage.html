@@ -14,15 +14,29 @@
     </div>
     <div class="row" ng-show="user">
         <div class="col-md-3">
-            <br/>
             <h3>Tags for this creative</h3>
-            <span ng-click="addCreative()" class="glyphicon glyphicon-plus"
+            <div class="form-group">
+                <input type="text" class="form-control" placeholder="Set Name"
+                       maxlength="255" ng-model="currentTag.name">
+            </div>
+            <span ng-click="addTag()" class="glyphicon glyphicon-plus"
                   style="cursor: pointer"></span>
-            <div ng-repeat="tag in tags"> {{tag.name}} </div>
+            <div ng-repeat="tag in tags"> {{tag.name}}</div>
         </div>
         <div class="col-md-6">
             <br/>
+            <div class="form-horizontal">
+                <div class="form-group" style="text-align: center">
+                    <label for="return1"><b>Name:</b></label>
+                    <input id="return1" name='return1' style="width:150px"
+                           type="text" ng-model="cr.name">
+                    <span ng-click="saveName()" class="glyphicon glyphicon-ok"
+                          style="cursor: pointer"></span>
+                </div>
+            </div>
             <h3>Chapters</h3>
+            <span ng-click="addChapter()" class="glyphicon glyphicon-plus"
+                  style="cursor: pointer"></span>
             <ul class="nav nav-tabs" role="tablist">
                 <li ng-repeat="chapter in chapters">
                     <a href="#{{chapter.number}}" aria-controls="{{chapter.number}}" role="tab" data-toggle="tab">{{chapter.number}}</a>
@@ -33,11 +47,17 @@
                     <div class="form-group">
                         <br/>
                         <label for="comment{{chapter.number}}">Unchain your fantasy!</label>
-                        <textarea class="form-control" rows="10" id="comment{{chapter.number}}"></textarea>
+                        <textarea class="form-control" rows="10" id="comment{{chapter.number}}"
+                                  ng-model="chapter.text"></textarea>
                     </div>
-                    <button class="btn btn-success">Save</button>
+                    <button class="btn btn-success" ng-click="save(chapter)">Save</button>
+                    <button class="btn btn-warning" ng-click="clear(chapter)">Clear</button>
+                    <button class="btn btn-danger" ng-click="remove(chapter)">Delete chapter</button>
                 </div>
             </div>
+        </div>
+        <div class="col-md-3">
+            <a href="personalPage.html" class="btn btn-primary">My page</a>
         </div>
     </div>
 </div>

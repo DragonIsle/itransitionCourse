@@ -64,6 +64,20 @@
             <column name="author_name" type="varchar(50)"/>
         </addColumn>
     </changeSet>
+    <changeSet id="8" author="ivan">
+        <addAutoIncrement tableName="chapters" columnName="id" columnDataType="int(11)"/>
+    </changeSet>
+    <changeSet id="9" author="ivan">
+        <dropColumn tableName="chapters" columnName="file_ref"/>
+        <addColumn tableName="chapters">
+            <column name="text" type="text"/>
+        </addColumn>
+    </changeSet>
+    <changeSet id="10" author="ivan">
+        <addColumn tableName="creatives">
+            <column name="rate_count" type="int(11)" defaultValue="0"/>
+        </addColumn>
+    </changeSet>
    <!-- <changeSet id="4" author="ivan">
         <addForeignKeyConstraint baseColumnNames="login"
                                  baseTableName="users"

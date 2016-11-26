@@ -11,4 +11,5 @@ import java.util.Collection;
 public interface TagService {
     Collection<Tag> getAll();
     Collection<Tag> getByCreative(int creativeId);
+    void addTag(Tag tag, Integer creativeId);
 }

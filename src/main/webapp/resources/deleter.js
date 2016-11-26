@@ -6,6 +6,9 @@
 var deleter = angular.module('deleter', []);
 
 deleter.controller('DeleteController', function ($http, $scope) {
+    $http.post('session').success(function (data) {
+        $scope.us=data;
+    });
     $http.get("user/all").success(function (data) {
         $scope.users=data;
     });

@@ -11,4 +11,5 @@ import java.util.Collection;
 public interface TagDao {
     Collection<Tag> getAll();
     Collection<Tag> getByCreative(int creativeId);
+    void addTag(Tag tag, Integer creativeId);
 }

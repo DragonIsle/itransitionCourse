@@ -21,9 +21,9 @@ public class Chapter {
     @JsonProperty
     private int number;
 
-    @Column(name = "file_ref")
+    @Column(name = "text")
     @JsonProperty
-    private String fileRef;
+    private String text;
 
     @ManyToOne(optional = false)
     @JoinColumn(name = "creative_id", referencedColumnName = "id", nullable = false, foreignKey = @ForeignKey(ConstraintMode.NO_CONSTRAINT))
@@ -38,8 +38,8 @@ public class Chapter {
         return creative;
     }
 
-    public void setFileRef(String fileRef) {
-        this.fileRef = fileRef;
+    public void setText(String text) {
+        this.text = text;
     }
 
     public void setNumber(int number) {
@@ -62,8 +62,8 @@ public class Chapter {
         return id;
     }
 
-    public String getFileRef() {
+    public String getText() {
 
-        return fileRef;
+        return text;
     }
 }

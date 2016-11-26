@@ -18,4 +18,6 @@ public interface CreativeDao {
     Collection<Creative> getByUserLogin(String login);
 
     Creative getById(int id);
+
+    void update(Creative creative);
 }

@@ -13,4 +13,5 @@ public interface CreativeService {
     void remove(Integer id);
     Collection<Creative> getByUserLogin(String login);
     Creative getById(int id);
+    void update(Creative creative);
 }

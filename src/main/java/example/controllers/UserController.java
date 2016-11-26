@@ -4,6 +4,7 @@ import example.enums.AuthType;
 import example.models.Chapter;
 import example.models.Creative;
 import example.models.User;
+import example.service.ChapterService;
 import example.service.CreativeService;
 import example.service.UserService;
 import example.session.MySessionClass;
@@ -14,9 +15,11 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
+import java.io.File;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.LinkedList;
+import java.util.List;
 
 @RestController
 @RequestMapping("user")
@@ -52,6 +55,7 @@ public class UserController {
         cr.setName(u.getName()+"'s note");
         cr.setAuthorName(u.getName());
         cs.add(cr);
+        session.setUser(us.getUser(u.getLogin()));
         return cs.getByUserLogin(u.getLogin());
     }
     @RequestMapping(method = RequestMethod.GET)

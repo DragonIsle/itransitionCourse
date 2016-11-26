@@ -31,6 +31,10 @@ public class Creative {
     @JsonProperty
     private double rating;
 
+    @Column(name="rate_count")
+    @JsonProperty
+    private int rateCount;
+
     @Column(name = "author_name")
     @JsonProperty
     private String authorName;
@@ -41,6 +45,15 @@ public class Creative {
     @ManyToMany(cascade=CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinTable(name="creative_tag", joinColumns=@JoinColumn(name="creative_id"), inverseJoinColumns=@JoinColumn(name="tag_name"))
     private List<Tag> tags;
+
+    public void setRateCount(int rateCount) {
+        this.rateCount = rateCount;
+    }
+
+    public int getRateCount() {
+
+        return rateCount;
+    }
 
     public void setTags(List<Tag> tags) {
         this.tags = tags;

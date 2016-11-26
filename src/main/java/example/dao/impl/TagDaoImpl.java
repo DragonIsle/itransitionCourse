@@ -22,6 +22,16 @@ public class TagDaoImpl implements TagDao {
         return entityManager.createQuery("from Tag", Tag.class).getResultList();
     }
 
+    @Override
+    public void addTag(Tag tag, Integer creativeId){
+        Creative cr=entityManager.find(Creative.class, creativeId);
+        if(cr!=null) {
+            cr.getTags().add(tag);
+            entityManager.remove(cr);
+            entityManager.persist(cr);
+        }
+    }
+
     public Collection<Tag> getByCreative(int creativeId){
         Creative cr=entityManager.find(Creative.class, creativeId);
         return cr.getTags();

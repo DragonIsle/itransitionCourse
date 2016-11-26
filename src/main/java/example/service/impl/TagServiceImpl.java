@@ -29,4 +29,9 @@ public class TagServiceImpl implements TagService {
     public Collection<Tag> getByCreative(int creativeId) {
         return td.getByCreative(creativeId);
     }
+
+    @Override
+    public void addTag(Tag tag, Integer creativeId) {
+        td.addTag(tag, creativeId);
+    }
 }

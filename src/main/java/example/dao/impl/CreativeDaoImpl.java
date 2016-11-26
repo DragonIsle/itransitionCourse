@@ -1,6 +1,7 @@
 package example.dao.impl;
 
 import example.dao.CreativeDao;
+import example.models.Chapter;
 import example.models.Creative;
 import example.models.User;
 import org.springframework.stereotype.Repository;
@@ -16,6 +17,18 @@ import java.util.Collection;
 public class CreativeDaoImpl implements CreativeDao{
     @PersistenceContext
     private EntityManager entityManager;
+
+    @Override
+    public void update(Creative creative) {
+        Creative cr=entityManager.find(Creative.class, creative.getId());
+        if(cr!=null) {
+            cr.setName(creative.getName());
+            cr.setRating(creative.getRating());
+            cr.setRateCount(creative.getRateCount());
+            entityManager.remove(cr);
+            entityManager.persist(cr);
+        }
+    }
 
     @Override
     public Creative getById(int id) {
@@ -41,6 +54,9 @@ public class CreativeDaoImpl implements CreativeDao{
     public void remove(Integer id) {
         Creative creative = entityManager.find(Creative.class, id);
         if (null != creative) {
+            for(Chapter chapter:creative.getChapters()){
+                entityManager.remove(chapter);
+            }
             entityManager.remove(creative);
         }
     }

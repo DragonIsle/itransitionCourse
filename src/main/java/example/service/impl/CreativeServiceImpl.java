@@ -19,6 +19,11 @@ public class CreativeServiceImpl implements CreativeService {
     private CreativeDao creativeDao;
 
     @Override
+    public void update(Creative creative) {
+        creativeDao.update(creative);
+    }
+
+    @Override
     public Collection<Creative> getAll() {
         return creativeDao.getAll();
     }
