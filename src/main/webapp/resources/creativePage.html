@@ -8,6 +8,26 @@
 </head>
 <body ng-app="personal">
 <div class="container" ng-controller="CreativeController">
+    <div class="row">
+        <nav class="navbar navbar-inverse" role="navigation">
+            <ul class="nav navbar-nav">
+                <li>
+                    <a href="personalPage.html">Personal Page</a>
+                </li>
+                <li>
+                    <a href="index.html">Home Page</a>
+                </li>
+                <li>
+                    <form class="navbar-form navbar-right" role="search">
+                        <div class="form-group">
+                            <input type="text" class="form-control" placeholder="Search">
+                        </div>
+                        <button type="submit" class="btn btn-info">Search</button>
+                    </form>
+                </li>
+            </ul>
+        </nav>
+    </div>
     <div ng-hide="user">
         <h3>You are not authorized!</h3>
         <a href="index.html" class="btn btn-default">Home page</a>
@@ -21,7 +41,11 @@
             </div>
             <span ng-click="addTag()" class="glyphicon glyphicon-plus"
                   style="cursor: pointer"></span>
-            <div ng-repeat="tag in tags"> {{tag.name}}</div>
+            <div ng-repeat="tag in tags">
+                <a ng-click="search(tag)">{{tag.name}}</a>
+                <span ng-click="removeTag(tag)" class="glyphicon glyphicon-remove"
+                      style="cursor: pointer"></span>
+            </div>
         </div>
         <div class="col-md-6">
             <br/>

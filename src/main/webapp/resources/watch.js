@@ -21,5 +21,8 @@ watch.controller("WatchController", function ($scope, $http) {
     $scope.rate=function () {
         var numb=$scope.rating.split("/10");
         $http.get("creative/rate", {params: {creativeId: getId(), rating: numb[0]}})
+    };
+    $scope.search=function (tag) {
+        window.location="searchResult.html?name="+tag.name;
     }
 });

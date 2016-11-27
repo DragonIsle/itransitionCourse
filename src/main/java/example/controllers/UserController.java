@@ -1,6 +1,7 @@
 package example.controllers;
 
 import example.enums.AuthType;
+import example.models.Achievement;
 import example.models.Chapter;
 import example.models.Creative;
 import example.models.User;
@@ -66,5 +67,9 @@ public class UserController {
     @RequestMapping(value = "/all", method = RequestMethod.GET)
     public Collection<User> getAll(){
         return us.getAll();
+    }
+    @RequestMapping(value="/achievements", method = RequestMethod.GET)
+    public  Collection<Achievement> getAchievements(@RequestParam("login") String login){
+        return us.getUser(login).getAchievements();
     }
 }

@@ -112,4 +112,15 @@ public class CreativeController {
         cr.setRateCount(cr.getRateCount()+1);
         cs.update(cr);
     }
+
+    @RequestMapping(value="/tag/remove", method = RequestMethod.POST)
+    public Collection<Tag> removeTag(@RequestBody Tag tag, @RequestParam Integer creativeId){
+        ts.remove(tag, creativeId);
+        return ts.getByCreative(creativeId);
+    }
+
+    @RequestMapping(value = "/get/bytag", method = RequestMethod.GET)
+    public Collection<Creative> getByTag(@RequestParam("name") String name){
+        return ts.get(name).getCreatives();
+    }
 }

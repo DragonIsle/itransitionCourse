@@ -4,10 +4,13 @@ import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import example.enums.AuthType;
 import example.enums.Role;
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 import org.hibernate.annotations.NotFound;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -40,8 +43,23 @@ public class User {
     @JsonProperty
     private String name;
 
+    @Fetch(FetchMode.SELECT)
     @OneToMany(mappedBy = "author", fetch = FetchType.EAGER)
     private Set<Creative> creatives;
+
+    @Fetch(FetchMode.SELECT)
+    @ManyToMany(cascade=CascadeType.ALL, fetch = FetchType.EAGER)
+    @JoinTable(name="user_achieve", joinColumns=@JoinColumn(name="user_name"), inverseJoinColumns=@JoinColumn(name="achieve_name"))
+    private List<Achievement> achievements;
+
+    public void setAchievements(List<Achievement> achievements) {
+        this.achievements = achievements;
+    }
+
+    public List<Achievement> getAchievements() {
+
+        return achievements;
+    }
 
     public void setCreatives(Set<Creative> creatives) {
         this.creatives = creatives;

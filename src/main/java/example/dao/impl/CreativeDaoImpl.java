@@ -1,6 +1,7 @@
 package example.dao.impl;
 
 import example.dao.CreativeDao;
+import example.models.Achievement;
 import example.models.Chapter;
 import example.models.Creative;
 import example.models.User;
@@ -47,6 +48,13 @@ public class CreativeDaoImpl implements CreativeDao{
 
     @Override
     public void add(Creative creative) {
+        User u=entityManager.find(User.class, creative.getAuthor().getLogin());
+        Achievement ach=entityManager.find(Achievement.class, "creative person(create 3 creatives)");
+        if(u.getCreatives().size()>1&&!u.getAchievements().contains(ach)){
+            u.getAchievements().add(ach);
+            entityManager.remove(u);
+            entityManager.persist(u);
+        }
         entityManager.persist(creative);
     }
 
@@ -58,6 +66,13 @@ public class CreativeDaoImpl implements CreativeDao{
                 entityManager.remove(chapter);
             }
             entityManager.remove(creative);
+            User u=creative.getAuthor();
+            Achievement ach=entityManager.find(Achievement.class, "Like a Gogol(delete all your creatives)");
+            if(u.getCreatives().size()==1&&!u.getAchievements().contains(ach)){
+                u.getAchievements().add(ach);
+                entityManager.remove(u);
+                entityManager.persist(u);
+            }
         }
     }
 }

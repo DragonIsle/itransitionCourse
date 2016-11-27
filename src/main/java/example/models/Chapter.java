@@ -2,6 +2,8 @@ package example.models;
 
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 
 import javax.persistence.*;
 
@@ -25,6 +27,7 @@ public class Chapter {
     @JsonProperty
     private String text;
 
+    @Fetch(FetchMode.SELECT)
     @ManyToOne(optional = false)
     @JoinColumn(name = "creative_id", referencedColumnName = "id", nullable = false, foreignKey = @ForeignKey(ConstraintMode.NO_CONSTRAINT))
     private Creative creative;

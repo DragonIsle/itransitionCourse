@@ -15,3 +15,14 @@ h3, h4, h2, h1, h5, label, table, span{
     text-shadow:#000 0px 1px 5px;
     margin:0px;
 }
+.photo:hover::after {
+    content: attr(data-title);
+    position: absolute;
+    left: 20%; top: 30%;
+    z-index: 1;
+    background: rgba(255,255,230,0.9);
+    font-family: Arial, sans-serif;
+    font-size: 11px;
+    padding: 5px 10px;
+    border: 1px solid #333;
+}

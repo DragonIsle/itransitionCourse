@@ -31,6 +31,16 @@ public class TagServiceImpl implements TagService {
     }
 
     @Override
+    public void remove(Tag tag, Integer creativeId) {
+        td.remove(tag, creativeId);
+    }
+
+    @Override
+    public Tag get(String name) {
+        return td.get(name);
+    }
+
+    @Override
     public void addTag(Tag tag, Integer creativeId) {
         td.addTag(tag, creativeId);
     }

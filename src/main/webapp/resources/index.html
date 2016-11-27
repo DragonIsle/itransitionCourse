@@ -10,6 +10,26 @@
 <body ng-app="example">
 <div class="container" ng-controller="AuthController">
     <div class="row">
+        <nav class="navbar navbar-inverse" role="navigation">
+            <ul class="nav navbar-nav">
+                <li>
+                    <a href="personalPage.html">Personal Page</a>
+                </li>
+                <li>
+                    <a href="index.html">Home Page</a>
+                </li>
+                <li>
+                    <form class="navbar-form navbar-right" role="search">
+                        <div class="form-group">
+                            <input type="text" class="form-control" placeholder="Search">
+                        </div>
+                        <button type="submit" class="btn btn-info">Search</button>
+                    </form>
+                </li>
+            </ul>
+        </nav>
+    </div>
+    <div class="row">
         <div class="col-md-3">
             <h3>Entrance</h3>
             <form ng-hide="noVisibility">
@@ -54,7 +74,7 @@
                 <div class="btn-group" id="buttons">
                     <button class="btn" ng-click="sortForName()">Name</button>
                     <button class="btn" ng-click="sortForRating()">Rating</button>
-                    </div>
+                </div>
             </div>
             <br/>
             <table class="table table-inverse" ng-show="creatives.length">

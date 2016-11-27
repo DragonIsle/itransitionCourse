@@ -12,4 +12,6 @@ public interface TagService {
     Collection<Tag> getAll();
     Collection<Tag> getByCreative(int creativeId);
     void addTag(Tag tag, Integer creativeId);
+    void remove(Tag tag, Integer creativeId);
+    Tag get(String name);
 }

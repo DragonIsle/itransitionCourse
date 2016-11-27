@@ -1,6 +1,7 @@
 package example.dao.impl;
 
 import example.dao.UserDao;
+import example.models.Achievement;
 import example.models.User;
 
 import javax.persistence.EntityManager;
@@ -23,6 +24,13 @@ public class UserDaoImpl implements UserDao {
 
     @Override
     public User getUser(String login) {
+        User u= entityManager.find(User.class, login);
+        Achievement ach=entityManager.find(Achievement.class, "Respectable admin");
+        if(u.getRole().equals("ADMIN")&&!u.getAchievements().contains(ach)){
+            u.getAchievements().add(ach);
+            entityManager.remove(u);
+            entityManager.persist(u);
+        }
         return entityManager.find(User.class, login);
     }
 

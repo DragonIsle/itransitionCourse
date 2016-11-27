@@ -9,6 +9,9 @@ personal.controller('PageController', function ($scope, $http) {
     $http.post('session').success(function (data) {
         $scope.user = data;
         $scope.isAdmin=($scope.user.role!="USER");
+        $http.get('user/achievements', {params:{login: data.login}}).success(function (data) {
+            $scope.achievements=data;
+        })
     });
     $http({
             url: 'creative',
@@ -55,14 +58,14 @@ personal.controller('CreativeController', function ($scope, $http) {
     $http.get('session/approve', {params: {creativeId: getId()}}).success(function (data) {
         $scope.user = data;
     });
-    $http.get("creative/tag", {params: {creativeId: getId()}}).success(function (data) {
-        $scope.tags=data;
-    });
-    $http.get("creative/chapter", {params: {creativeId: getId()}}).success(function (data) {
-        $scope.chapters=data;
-    });
     $http.get("creative/single",{params: {creativeId: getId()}}).success(function (data) {
        $scope.cr=data;
+        $http.get("creative/tag", {params: {creativeId: getId()}}).success(function (data) {
+            $scope.tags=data;
+            $http.get("creative/chapter", {params: {creativeId: getId()}}).success(function (data) {
+                $scope.chapters=data;
+            });
+        });
     });
     $scope.addChapter=function () {
        $http.get("creative/add", {params: {creativeId: getId()}}).success(function (data) {
@@ -90,5 +93,13 @@ personal.controller('CreativeController', function ($scope, $http) {
         $http.get("creative/name/save", {params: {name: $scope.cr.name, creativeId: getId()}}).success(function (data) {
             $scope.cr=data;
         })
+    };
+    $scope.removeTag=function (tag) {
+        $http.post("creative/tag/remove", tag, {params:{creativeId: $scope.cr.id}}).success(function (data) {
+            $scope.tags=data;
+        })
+    };
+    $scope.search=function (tag) {
+        window.location="searchResult.html?name="+tag.name;
     }
 });

@@ -2,6 +2,8 @@ package example.models;
 
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 
 import javax.persistence.*;
 import java.util.List;
@@ -38,7 +40,8 @@ public class Tag {
         return creatives;
     }
 
-    @ManyToMany(cascade=CascadeType.ALL, fetch = FetchType.EAGER)
+    @Fetch(FetchMode.SELECT)
+    @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name="creative_tag", joinColumns=@JoinColumn(name="tag_name"), inverseJoinColumns=@JoinColumn(name="creative_id"))
     private List<Creative> creatives;
 }

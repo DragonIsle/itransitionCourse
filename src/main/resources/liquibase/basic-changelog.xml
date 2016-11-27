@@ -78,21 +78,19 @@
             <column name="rate_count" type="int(11)" defaultValue="0"/>
         </addColumn>
     </changeSet>
-   <!-- <changeSet id="4" author="ivan">
-        <addForeignKeyConstraint baseColumnNames="login"
-                                 baseTableName="users"
-                                 constraintName="fk_user_login"
-                                 onDelete="CASCADE"
-                                 onUpdate="RESTRICT"
-                                 referencedColumnNames="user_id"
-                                 referencedTableName="creatives"/>
-        <addForeignKeyConstraint baseColumnNames="id"
-                                 baseTableName="creatives"
-                                 constraintName="fk_creative_id"
-                                 onDelete="CASCADE"
-                                 onUpdate="RESTRICT"
-                                 referencedColumnNames="creative_id"
-                                 referencedTableName="chapters"/>
+    <changeSet id="11" author="ivan">
+        <createTable tableName="user_achieve">
+            <column name="achieve_name" type="varchar(50)"/>
+            <column name="user_name" type="varchar(50)"/>
+        </createTable>
+        <addPrimaryKey tableName="user_achieve" columnNames="achieve_name, user_name"/>
     </changeSet>
-    -->
+    <changeSet id="12" author="ivan">
+        <createTable tableName="achievements">
+            <column name="name" type="varchar(50)">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="image_url" type="varchar(255)"/>
+        </createTable>
+    </changeSet>
 </databaseChangeLog>
