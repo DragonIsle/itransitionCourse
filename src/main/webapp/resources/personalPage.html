@@ -3,7 +3,7 @@
     <title>Personal Page</title>
     <meta charset="UTF-8">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
-    <link rel="stylesheet" href="css/my.css">
+    <link rel="stylesheet" href="css/cyborg.css">
 </head>
 <body ng-app="personal">
 <div class="container" ng-controller="PageController">
@@ -16,14 +16,6 @@
                 <li>
                     <a href="index.html">Home Page</a>
                 </li>
-                <li>
-                    <form class="navbar-form navbar-right" role="search">
-                        <div class="form-group">
-                            <input type="text" class="form-control" placeholder="Search">
-                        </div>
-                        <button type="submit" class="btn btn-info">Search</button>
-                    </form>
-                </li>
             </ul>
         </nav>
     </div>
@@ -35,7 +27,7 @@
         <div class="col-md-3 col-md-offset-2">
             <br/>
             <br/>
-            <img src="{{user.avatarId}}" width="170" height="220">
+            <img src="{{user.avatarId}}" width="230" height="230">
         </div>
         <button class="btn btn-danger" ng-click="logout()">Logout</button>
         <div class="col-md-3">

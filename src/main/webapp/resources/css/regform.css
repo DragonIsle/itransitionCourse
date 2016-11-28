@@ -2,11 +2,6 @@ html, body {
     width: 100%;
     height: 100%;
 }
-body {
-    background: url("images/Black-and-white-backgrounds-tumblrtumblr-static-forest-black-white-dark-forest-wallpaper-wallpines-tzx1mqky.jpg") center no-repeat;
-    background-size: cover;
-}
-
 /*sass variables used*/
 /*site container*/
 .wrapper{

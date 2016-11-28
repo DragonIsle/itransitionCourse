@@ -26,7 +26,7 @@ public class Achievement {
     private String imageUrl;
 
     @Fetch(FetchMode.SELECT)
-    @ManyToMany(cascade=CascadeType.ALL, fetch = FetchType.EAGER)
+    @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name="user_achieve", joinColumns=@JoinColumn(name="achieve_name"), inverseJoinColumns=@JoinColumn(name="user_name"))
     private List<User> owners;
 

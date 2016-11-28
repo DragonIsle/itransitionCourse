@@ -48,7 +48,7 @@ public class User {
     private Set<Creative> creatives;
 
     @Fetch(FetchMode.SELECT)
-    @ManyToMany(cascade=CascadeType.ALL, fetch = FetchType.EAGER)
+    @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name="user_achieve", joinColumns=@JoinColumn(name="user_name"), inverseJoinColumns=@JoinColumn(name="achieve_name"))
     private List<Achievement> achievements;
 

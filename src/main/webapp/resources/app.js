@@ -11,6 +11,9 @@ App.controller('AuthController', function ($scope, $http) {
         $scope.us=data;
         $scope.noVisibility=data;
     });
+    $http.get('creative/tag/all').success(function (data) {
+        $scope.tags=data;
+    });
     $scope.reppassw="";
     $scope.messageVis=false;
     $scope.noVisibility=false;
@@ -83,5 +86,8 @@ App.controller('AuthController', function ($scope, $http) {
         $http.get("session").success(function (data) {
             window.location="index.html";
         })
+    };
+    $scope.search=function (tag) {
+        window.location="searchResult.html?name="+tag.name;
     }
 });

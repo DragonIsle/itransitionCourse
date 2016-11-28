@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.annotation.Resource;
 import java.io.File;
 import java.util.Collection;
+import java.util.Iterator;
 
 /**
  * Created by saul on 11/14/16.
@@ -122,5 +123,17 @@ public class CreativeController {
     @RequestMapping(value = "/get/bytag", method = RequestMethod.GET)
     public Collection<Creative> getByTag(@RequestParam("name") String name){
         return ts.get(name).getCreatives();
+    }
+    @RequestMapping(value = "/tag/all", method = RequestMethod.GET)
+    public Collection<Tag> getAllTags(){
+        Collection<Tag> tags=ts.getAll();
+        Iterator<Tag> i=tags.iterator();
+        while(i.hasNext()){
+            Tag tg=i.next();
+            if(tg.getCreatives().size()==0) {
+                i.remove();
+            }
+        }
+        return tags;
     }
 }

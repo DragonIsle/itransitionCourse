@@ -1,14 +1,13 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:spring="http://java.sun.com/jsf/composite" xmlns:c="http://java.sun.com/jsf/core"
-      xmlns:th="http://java.sun.com/jsf/facelets">
+<html lang="en" ng-app="example" ng-controller="AuthController">
 <head>
     <meta charset="UTF-8">
     <title>Home Page</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
-    <link rel="stylesheet" href="css/my.css">
+    <link rel="stylesheet" href="css/cyborg.css">
 </head>
-<body ng-app="example">
-<div class="container" ng-controller="AuthController">
+<body>
+<div class="container">
     <div class="row">
         <nav class="navbar navbar-inverse" role="navigation">
             <ul class="nav navbar-nav">
@@ -17,14 +16,6 @@
                 </li>
                 <li>
                     <a href="index.html">Home Page</a>
-                </li>
-                <li>
-                    <form class="navbar-form navbar-right" role="search">
-                        <div class="form-group">
-                            <input type="text" class="form-control" placeholder="Search">
-                        </div>
-                        <button type="submit" class="btn btn-info">Search</button>
-                    </form>
                 </li>
             </ul>
         </nav>
@@ -94,6 +85,12 @@
                     </td>
                 </tr>
             </table>
+        </div>
+        <div class="col-md-3">
+            <h3>Tags:</h3>
+            <div ng-repeat="tag in tags">
+                <a ng-click="search(tag)">{{tag.name}}</a>
+            </div>
         </div>
     </div>
 </div>

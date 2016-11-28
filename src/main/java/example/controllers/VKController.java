@@ -58,6 +58,7 @@ public class VKController {
             u.setRole(String.valueOf(Role.USER));
             u.setType(String.valueOf(AuthType.VK_AUTH));
             u.setPassword("");
+            u.setAvatarId(profile.getPhoto());
             userService.add(u);
         }
         session.setUser(u);
