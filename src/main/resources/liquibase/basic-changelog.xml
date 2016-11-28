@@ -93,4 +93,9 @@
             <column name="image_url" type="varchar(255)"/>
         </createTable>
     </changeSet>
+    <changeSet id="13" author="ivan">
+        <addColumn tableName="users">
+            <column name="theme" type="varchar(50)" defaultValue="css/cyborg.css"/>
+        </addColumn>
+    </changeSet>
 </databaseChangeLog>

@@ -2,11 +2,11 @@
 <head>
     <title>Registration Page</title>
 </head>
-<body ng-app="example">
+<body ng-app="example"  ng-controller="AuthController">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
 <link href="css/regform.css" rel="stylesheet" type="text/css">
-<link rel="stylesheet" href="css/cyborg.css">
-<div class="wrapper" ng-controller="AuthController">
+<link rel="stylesheet" href="{{style}}">
+<div class="wrapper">
     <h1>Register For An Account</h1>
     <p>Please enter your login and password</p>
     <form class="form" method="post" >

@@ -2,7 +2,9 @@ package example.controllers;
 
 import example.models.Creative;
 import example.models.User;
+import example.service.UserService;
 import example.session.MySessionClass;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -18,6 +20,9 @@ import javax.annotation.Resource;
 public class SessionController {
     @Resource(name="session")
     private MySessionClass session;
+
+    @Autowired
+    private UserService us;
 
     @RequestMapping(method = RequestMethod.POST)
     public User getCurrentUser(){
@@ -35,5 +40,19 @@ public class SessionController {
             if(creative.getId()==creativeId) return true;
         }
         return false;
+    }
+
+    @RequestMapping(value = "/style", method = RequestMethod.GET)
+    public String getStyle(){
+        return session.getUser().getTheme();
+    }
+
+    @RequestMapping(value = "/change/style", method = RequestMethod.GET)
+    public String changeStyle(@RequestParam("style") String style){
+        User u=us.getUser(session.getUser().getLogin());
+        u.setTheme("css/"+style+".css");
+        us.update(u);
+        session.setUser(us.getUser(u.getLogin()));
+        return u.getTheme();
     }
 }

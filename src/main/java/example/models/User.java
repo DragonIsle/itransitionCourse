@@ -43,6 +43,10 @@ public class User {
     @JsonProperty
     private String name;
 
+    @Column
+    @JsonProperty
+    private String theme;
+
     @Fetch(FetchMode.SELECT)
     @OneToMany(mappedBy = "author", fetch = FetchType.EAGER)
     private Set<Creative> creatives;
@@ -51,6 +55,15 @@ public class User {
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name="user_achieve", joinColumns=@JoinColumn(name="user_name"), inverseJoinColumns=@JoinColumn(name="achieve_name"))
     private List<Achievement> achievements;
+
+    public void setTheme(String theme) {
+        this.theme = theme;
+    }
+
+    public String getTheme() {
+
+        return theme;
+    }
 
     public void setAchievements(List<Achievement> achievements) {
         this.achievements = achievements;

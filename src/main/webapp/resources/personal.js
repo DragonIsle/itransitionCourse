@@ -6,6 +6,9 @@
 var personal = angular.module('personal', []);
 
 personal.controller('PageController', function ($scope, $http) {
+    $http.get("session/style").success(function (data) {
+        $scope.style=data;
+    });
     $http.post('session').success(function (data) {
         $scope.user = data;
         $scope.isAdmin=($scope.user.role!="USER");
@@ -48,6 +51,11 @@ personal.controller('PageController', function ($scope, $http) {
         $http.get("session").success(function (data) {
             window.location="index.html";
         })
+    };
+    $scope.changeStyle=function (style) {
+        $http.get("session/change/style", {params:{style:style}}).success(function (data) {
+            $scope.style=data;
+        })
     }
 });
 
@@ -55,6 +63,9 @@ personal.controller('CreativeController', function ($scope, $http) {
     function getId() {
         return window.location.search.substring(1).split("=")[1];
     }
+    $http.get("session/style").success(function (data) {
+        $scope.style=data;
+    });
     $http.get('session/approve', {params: {creativeId: getId()}}).success(function (data) {
         $scope.user = data;
     });

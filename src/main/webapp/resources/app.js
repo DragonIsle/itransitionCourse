@@ -4,6 +4,10 @@
 var App = angular.module('example', []);
 
 App.controller('AuthController', function ($scope, $http) {
+    $scope.style="css/cyborg.css";
+    $http.get("session/style").success(function (data) {
+      $scope.style=data;
+    });
     $http.post('creative').success(function (data) {
             $scope.creatives = data;
     });
@@ -23,6 +27,7 @@ App.controller('AuthController', function ($scope, $http) {
                 $scope.noVisibility = data;
                 $scope.us = data;
                 $scope.message=false;
+                $scope.style=data.theme;
             }else{
                 $scope.message=true;
             }

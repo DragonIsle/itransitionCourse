@@ -42,7 +42,10 @@ public class UserDaoImpl implements UserDao {
 
     @Override
     public void update(User user) {
-        entityManager.refresh(user);
+        User u=entityManager.find(User.class, user.getLogin());
+        u.setTheme(user.getTheme());
+        entityManager.remove(u);
+        entityManager.persist(u);
     }
 
     @Override

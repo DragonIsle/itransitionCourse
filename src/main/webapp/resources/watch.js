@@ -9,6 +9,10 @@ watch.controller("WatchController", function ($scope, $http) {
     function getId() {
         return window.location.search.substring(1).split("=")[1];
     }
+    $scope.style="css/cyborg.css";
+    $http.get("session/style").success(function (data) {
+        $scope.style=data;
+    });
     $http.get("creative/tag", {params: {creativeId: getId()}}).success(function (data) {
         $scope.tags=data;
     });
